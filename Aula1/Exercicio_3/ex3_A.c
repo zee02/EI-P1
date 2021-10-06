@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define multiplicador 2
 
 int main() {
-    int valor, valor_total, multiplicador;
-    multiplicador = 2;
+    int valor, valor_total;
     printf("Apresente um valor inteiro: \t");
     scanf("%d", &valor);
     valor_total = valor * multiplicador;
