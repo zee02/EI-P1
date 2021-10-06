@@ -1,6 +1,6 @@
 #include <stdio.h>
 
 int main(){
-    printf("Hello world!");
+    printf("Exemplo de tabulação\t");
     return 0;
 }
