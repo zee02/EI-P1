@@ -11,24 +11,22 @@ int main()
 
     printf("Insira o segundo número inteiro: \t");
     scanf("%d", &val2);
-
     printf("\n");
     printf("\n");
     soma = val1 + val2; 
-    printf("Soma: %s%s%d%s%d%s%5.1f","\t", "\t",val1, " + ", val2, " = " ,soma);
+    printf("Soma: \t \t %d%s%d%s%5.1f",val1, " + ", val2, " = " ,soma);
     printf("\n");
     sub = (float)val1 - val2;
-    printf("Subtração: %s%s%d%s%d%s%5.1f", "\t", "\t",val1, " - ", val2, " = " ,sub);
+    printf("Subtração: \t \t  %d%s%d%s%5.1f" ,val1, " - ", val2, " = " ,sub);
     printf("\n");
     mult = (float)val1 * val2;
-    printf("Multiplicação: %s%s%d%s%d%s%5.1f", "\t", "\t", val1, " * ", val2, " = " ,mult);
+    printf("Multiplicação: \t \t  %d%s%d%s%5.1f", val1, " * ", val2, " = " ,mult);
     printf("\n");
     div = (float)val1 / val2;
-    printf("Divisão: %s%s%d%s%d%s%5.1f", "\t", "\t", val1, " / ", val2, " = " ,div);
+    printf("Divisão: \t \t %d%s%d%s%5.1f", val1, " / ", val2, " = " ,div);
     printf("\n");
     resto = val1 % val2;
-    printf("Resto divisao inteira: %s%s%d%s%d%s%5.1f", "\t", "\t",val1, " % ", val2, " = " ,resto);
+    printf("Resto divisao inteira: \t \t %d%s%d%s%5.1f",val1, " % ", val2, " = " ,resto);
     printf("\n");
-
     return 0;
 }
