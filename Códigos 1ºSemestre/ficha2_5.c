@@ -15,15 +15,15 @@ int main() {
     }
     else
         if(valor > 500 && valor <= 1250) {
-            printf("Tem um desconto de 4! Irá pagar : %d€\t", desconto1);
+            printf("Tem um desconto! Irá pagar : %d€\t", desconto1);
         }
             else
                 if(valor > 1250 && valor <= 2000) {
-                printf("Tem um desconto de 6! Irá pagar : %d€\t", desconto2);
+                printf("Tem um desconto ! Irá pagar : %d€\t", desconto2);
                 }
                     else
                         if(valor > 2000) {
-                        printf("Tem um desconto de 6! Irá pagar : %d€\t", desconto3);
+                        printf("Tem um desconto! Irá pagar : %d€\t", desconto3);
                         
                         }
 }
