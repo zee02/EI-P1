@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 int main() {
   char operador;
   int num1, num2;
