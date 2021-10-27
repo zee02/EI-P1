@@ -23,6 +23,7 @@ int main() {
     case 'x':
       printf("%d * %d = %d", num1, num2, num1 * num2);
       break;
+      
     case '/':
       if(num1 != 0 && num2 != 0) {
         printf("%d / %d = %d", num1, num2, num1 / num2);

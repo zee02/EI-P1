@@ -2,7 +2,7 @@
 #include <stdlib.h>
 int main()
 {
-    int num, i, num_soma, soma;
+    int num, i, x,num_soma,nums,soma, numero;
     soma = 0;
     i = 1;
     num_soma = 1;
@@ -15,7 +15,7 @@ int main()
         return 0;
     }
     else
-        for (int numero = 0; numero <= num; numero++)
+        for (numero = 0; numero <= num; numero++)
         {
             soma += numero;
         }
