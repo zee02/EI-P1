@@ -20,7 +20,11 @@ int main()
 char menu()
 {
     char opcao;
-    printf("Triangulo (No): ***Circulo (No): **OPCOES(T)riangulo(R)etangulo(Q)uadrado(C)irculo(F)im Selecione opcao: _");
+    printf("       OPCOES\n(T)riangulo\n(R)etangulo\n(Q)uadrado\n(C)irculo\n(F)im \nSelecione opcao: _");
+    printf("\n\nSelecione opção: ");
+    scanf(" %c", &opcao);
+    opcao=toupper(opcao);
+    return opcao;
 }
 int leNumero()
 {
