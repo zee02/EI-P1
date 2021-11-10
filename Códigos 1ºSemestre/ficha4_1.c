@@ -11,7 +11,7 @@ int main()
     char op;
 
     do
-    {
+    {   
         op = menu();
     } while (op != 'F');
     return 0;
