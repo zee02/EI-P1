@@ -14,6 +14,7 @@ int lerInteiro(int minimo, int maximo);
 void limpaBufferStdin(void);
 int lerQuantidadeEstudantes();
 tipoEstudante lerDadosEstudante();
+void mostrarDados();
 int main()
 {
     int numEstudantes;
@@ -28,7 +29,30 @@ int main()
     {
         printf("Numero: \n%d  Nome: %s", turma[0].numero, turma[0].nome);
     }
+
+    mostrarDados(turma, numEstudantes);
     return 0;
+}
+
+void lerNotas(tipoEstudante v[MAX_ESTUDANTES], int limite)
+{
+
+    for (int i = 0; i < limite; i++)
+    {
+        printf("Estudante Numero: %d - %s", v[i].numero, v[i].nome);
+        v[i].nota = lerInteiro(0,20);
+    }
+}
+
+void mostrarDados(tipoEstudante v[MAX_ESTUDANTES], int limite)
+{
+    for (int i = 0; i < limite; i++)
+    {
+        printf("Numero: \n%d  \nNome: %s", v[i].numero, v[i].nome);
+
+        if(v[i].nota!=-1)
+        printf("A nota do estudante foi: %d", v[i].nota);
+    }
 }
 
 tipoEstudante lerDadosEstudante()
