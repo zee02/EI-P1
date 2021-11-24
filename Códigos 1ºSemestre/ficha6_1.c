@@ -13,23 +13,29 @@ typedef struct
 int lerInteiro(int minimo, int maximo);
 void limpaBufferStdin(void);
 int lerQuantidadeEstudantes();
+tipoEstudante lerDadosEstudante();
 int main()
 {
     int numEstudantes;
 
     tipoEstudante turma[MAX_ESTUDANTES];
     numEstudantes = lerQuantidadeEstudantes();
-    turma[0] = lerDadosEstudante();
+    for (int i = 0; i < numEstudantes; i++)
+    {
+        turma[0] = lerDadosEstudante();
+    }
+    printf("Numero: \n%d  Nome: %s", turma[0].numero, turma[0].nome);
     return 0;
 }
 
-tipoEstudante lerDadosEstudante() {
+tipoEstudante lerDadosEstudante()
+{
     tipoEstudante e;
     int num;
     printf("Indique numero: ");
-    num = lerInteiro(1-9999);
-    printf ("Indique nome ");
-    fgets()
+    num = lerInteiro(1, 9999);
+    printf("Indique nome ");
+    fgets(e.nome, MAX_STRING, stdin);
     return e;
 }
 
