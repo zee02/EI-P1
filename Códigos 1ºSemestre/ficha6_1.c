@@ -24,7 +24,10 @@ int main()
     {
         turma[0] = lerDadosEstudante();
     }
-    printf("Numero: \n%d  Nome: %s", turma[0].numero, turma[0].nome);
+    for (int i = 0; i < numEstudantes; i++)
+    {
+        printf("Numero: \n%d  Nome: %s", turma[0].numero, turma[0].nome);
+    }
     return 0;
 }
 
@@ -34,7 +37,7 @@ tipoEstudante lerDadosEstudante()
     int num;
     printf("Indique numero: ");
     num = lerInteiro(1, 9999);
-    printf("Indique nome ");
+    printf("Indique nome: ");
     fgets(e.nome, MAX_STRING, stdin);
     return e;
 }
