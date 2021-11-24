@@ -12,22 +12,25 @@ typedef struct
 
 int lerInteiro(int minimo, int maximo);
 void limpaBufferStdin(void);
+int lerQuantidadeEstudantes();
 int main()
 {
-    tipoEstudante turma[MAX_ESTUDANTES];
-    scanf("%d", &(turma[0].numero));
-    turma[0].numero = lerInteiro(1, 9999);
-    printf("Indique nome: ");
-    fgets(turma[0].nome, MAX_STRING, stdin);
-    printf("\nNome: %s", turma[0].nome);
-    printf("\nNumero: %d", turma[0].numero);
-    turma[1].numero = lerInteiro(1, 9999);
-    printf("Indique nome: ");
-    fgets(turma[1].nome, MAX_STRING, stdin);
-    printf("\nNome: %s", turma[1].nome);
-    printf("\nNumero: %d", turma[1].numero);
+    int numEstudantes;
 
+    tipoEstudante turma[MAX_ESTUDANTES];
+    numEstudantes = lerQuantidadeEstudantes();
+    turma[0] = lerDadosEstudante();
     return 0;
+}
+
+tipoEstudante lerDadosEstudante() {
+    tipoEstudante e;
+    int num;
+    printf("Indique numero: ");
+    num = lerInteiro(1-9999);
+    printf ("Indique nome ");
+    fgets()
+    return e;
 }
 
 int lerInteiro(int minimo, int maximo)
@@ -62,7 +65,7 @@ void limpaBufferStdin(void)
     } while (chr != '\n' && chr != EOF);
 }
 
-int leQuantidadeEstudantes()
+int lerQuantidadeEstudantes()
 {
     int quant;
 
