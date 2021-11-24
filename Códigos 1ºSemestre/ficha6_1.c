@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#define MAX_STRING 50
+#define MAX_ESTUDANTES 100
 typedef struct 
 {
     int numero;
@@ -12,7 +14,7 @@ int lerInteiro(int minimo, int maximo);
 void limpaBufferStdin(void);
 int main()
 {
-    tipoEstudante estudante;
+    tipoEstudante turma[MAX_ESTUDANTES];
     estudante.numero = lerInteiro(1,9999);
     fgets(estudante.nome, MAX_STRING, stdin);
     printf("\nNome: %s", estudante.nome);
