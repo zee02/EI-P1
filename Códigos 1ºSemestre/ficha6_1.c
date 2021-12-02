@@ -5,11 +5,15 @@
 #include <locale.h>
 #define MAX_STRING 50
 #define MAX_ESTUDANTES 100
+typedef struct {
+    int dia, mes, ano;
+}tipoData;
 typedef struct
 {
     int numero;
     char nome[MAX_STRING];
     int nota;
+    tipoData data;
 } tipoEstudante;
 int lerQuantidadeEstudantes();
 int lerInteiro(char mensagem[MAX_STRING], int minimo, int maximo);
@@ -18,17 +22,18 @@ void limpaBufferStdin(void);
 tipoEstudante lerDadosEstudante();
 void lerNotas(tipoEstudante v[MAX_ESTUDANTES], int limite);
 void mostrarDados(tipoEstudante v[MAX_ESTUDANTES], int limite);
-char menu(int);
+char menu(int numE, int numAvaliados);
 int procura(int numAProcurar, tipoEstudante v[], int quant);
+
 int main()
 {
-    int i, numEstudantes = 0, aux, posicao, num;
+    int i, numEstudantes = 0, aux, posicao, num, numAvaliados = 0;
     tipoEstudante turma[MAX_ESTUDANTES];
     char opcao;
     setlocale(LC_ALL, "");
     do
     {
-        opcao = menu(numEstudantes);
+        opcao = menu(numEstudantes, numAvaliados);
         switch (opcao)
         {
         case 'A':
@@ -36,7 +41,7 @@ int main()
             {
                 aux = lerInteiro("Indique numero ", 1, 9999);
                 posicao = procura(aux, turma, numEstudantes);
-                if (posicao == -1)
+                if (posicao != -1)
                 {
                     turma[numEstudantes].numero = aux;
                     lerString("Indique nome ", turma[numEstudantes].nome, MAX_STRING);
@@ -54,13 +59,28 @@ int main()
             break;
 
         case 'I':
-            if(numEstudantes==0){
+            if (numEstudantes == 0)
+            {
                 printf("Não há estudantes...\n");
             }
-            else{
-                num=lerInteiro("Indique número do estudante ", 1, 9999);
-                posicao = procura(num,turma,numEstudantes);
-                turma[posicao].nota = lerInteiro("Indique nota ", 0 ,20);
+            else
+            {
+                num = lerInteiro("Indique número do estudante ", 1, 9999);
+                posicao = procura(num, turma, numEstudantes);
+                if (posicao != -1)
+                {
+                    printf("Estudante %s ", turma[posicao].nome);
+                    turma[posicao].nota = lerInteiro("Indique nota ", 0, 20);
+                    turma[posicao].data=lerData();  
+                    if (turma[posicao].nota == -1)
+                    {
+                        numAvaliados++;
+                    }
+                }
+                else
+                {
+                    printf("Não existe estudante com nota ");
+                }
             }
             break;
         case 'M':
@@ -81,24 +101,24 @@ int main()
 
 int procura(int numAProcurar, tipoEstudante v[], int quant)
 {
-    int pos=-1;
+    int pos = -1;
     for (int i = 0; i < quant; i++)
     {
-        if (v[i].numero == numAProcurar)    
+        if (v[i].numero == numAProcurar)
         {
-            pos=i;
-            i=quant;
+            pos = i;
+            i = quant;
         }
-        
     }
     return pos;
 }
-char menu(int numE)
+char menu(int numE, int numAvaliados)
 {
     char op;
-    printf("************************ Menu Principal ************************\n");
+    printf("\n\n************************ Menu Principal ************************\n");
     printf("Estudantes Inseridos: %2d\n", numE);
-    printf("Estudantes Avaliados: **  Notas Positivas (%): ***.**\n");
+    printf("Estudantes Avaliados: %2d\n", numAvaliados);
+    printf("Notas Positivas (%): ***.**\n");
     printf("A - Acrescenta Estudante\n");
     printf("I - Introdução Notas\n");
     printf("M - Mostrar Dados\n");
@@ -129,7 +149,8 @@ void mostrarDados(tipoEstudante v[MAX_ESTUDANTES], int limite)
         printf("\nNome: %s    Numero: %d \n", v[i].nome, v[i].numero);
         if (v[i].nota != -1)
         {
-            printf("Nota: %d", v[i].nota);
+            printf("Nota: \n%d  ", v[i].nota);
+            printf("Data: %d-%d-%d", v[i].data.dia, v[i].data.mes,v[i].data.ano);
         }
     }
 }
@@ -225,13 +246,13 @@ void limpaBufferStdin(void)
         chr = getchar();
     } while (chr != '\n' && chr != EOF);
 }
-/*
+
 tipoData lerData(void)
 {
     tipoData data;
     int maxDiasMes;
     printf("\n Data da Avaliacao");
-    data.ano = lerInteiro(" ano", 2014, 2016);
+    data.ano = lerInteiro(" ano", 2021, 2022);
     data.mes = lerInteiro(" mes", 1, 12);
     switch (data.mes)
     {
@@ -257,4 +278,3 @@ tipoData lerData(void)
     data.dia = lerInteiro(" dia:", 1, maxDiasMes);
     return data;
 }
-*/
