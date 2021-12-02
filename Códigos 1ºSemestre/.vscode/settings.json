@@ -2,6 +2,11 @@
   "files.associations": {
     "stdlib.h": "c",
     "stdio.h": "c",
-    "fich4_7.C": "cpp"
+    "fich4_7.C": "cpp",
+    "__bit_reference": "c",
+    "algorithm": "c",
+    "bitset": "c",
+    "chrono": "c",
+    "unordered_map": "c"
   }
 }

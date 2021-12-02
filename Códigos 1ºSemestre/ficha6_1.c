@@ -5,9 +5,10 @@
 #include <locale.h>
 #define MAX_STRING 50
 #define MAX_ESTUDANTES 100
-typedef struct {
+typedef struct
+{
     int dia, mes, ano;
-}tipoData;
+} tipoData;
 typedef struct
 {
     int numero;
@@ -24,6 +25,7 @@ void lerNotas(tipoEstudante v[MAX_ESTUDANTES], int limite);
 void mostrarDados(tipoEstudante v[MAX_ESTUDANTES], int limite);
 char menu(int numE, int numAvaliados);
 int procura(int numAProcurar, tipoEstudante v[], int quant);
+void contas(tipoEstudante v[MAX_ESTUDANTES], int *quantEstudantes, float *percPosi, int numAvaliados);
 
 int main()
 {
@@ -71,7 +73,7 @@ int main()
                 {
                     printf("Estudante %s ", turma[posicao].nome);
                     turma[posicao].nota = lerInteiro("Indique nota ", 0, 20);
-                    turma[posicao].data=lerData();  
+                    turma[posicao].data = lerData();
                     if (turma[posicao].nota == -1)
                     {
                         numAvaliados++;
@@ -132,6 +134,25 @@ char menu(int numE, int numAvaliados)
     return op;
 }
 
+void contas(tipoEstudante v[MAX_ESTUDANTES], int *quantEstudantes, float *percPosi, int numAvaliados)
+{
+    int numaval = 0, positivas = 0;
+    for (int i = 0; i < numAvaliados; i++)
+    {
+        if (v[i].nota == -1)
+        {
+            numaval++;
+            if(v[i].nota >= 10){
+                positivas++;
+            }
+        }
+    }
+    *quantEstudantes=numaval;
+    if(numaval!=0){
+    *percPosi=(float)positivas/numaval;
+    }
+}
+
 void lerNotas(tipoEstudante v[MAX_ESTUDANTES], int limite)
 {
     int i;
@@ -150,7 +171,7 @@ void mostrarDados(tipoEstudante v[MAX_ESTUDANTES], int limite)
         if (v[i].nota != -1)
         {
             printf("Nota: \n%d  ", v[i].nota);
-            printf("Data: %d-%d-%d", v[i].data.dia, v[i].data.mes,v[i].data.ano);
+            printf("Data: %d-%d-%d", v[i].data.dia, v[i].data.mes, v[i].data.ano);
         }
     }
 }
