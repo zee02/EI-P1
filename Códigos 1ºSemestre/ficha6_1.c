@@ -18,9 +18,10 @@ tipoEstudante lerDadosEstudante();
 void lerNotas(tipoEstudante v[MAX_ESTUDANTES], int limite);
 void mostrarDados(tipoEstudante v[MAX_ESTUDANTES], int limite);
 char menu(int);
+int procura(int numAProcurar, tipoEstudante v[], int quant);
 int main()
 {
-    int i, numEstudantes = 0;
+    int i, numEstudantes = 0, aux, posicao;
     tipoEstudante turma[MAX_ESTUDANTES];
     char opcao;
     setlocale(LC_ALL, "");
@@ -30,9 +31,23 @@ int main()
         switch (opcao)
         {
         case 'A':
-            if(numEstudantes < MAX_ESTUDANTES){
-                turma[numEstudantes]=lerDadosEstudante();
-            }else{
+            if (numEstudantes < MAX_ESTUDANTES)
+            {
+                aux = lerInteiro("Indique numero ", 1, 9999);
+                posicao = procura(aux, turma, numEstudantes);
+                if (posicao != -1)
+                {
+                    turma[numEstudantes].numero = aux;
+                    lerString("Indique nome ", turma[numEstudantes].nome, MAX_STRING);
+                    numEstudantes++;
+                }
+                else
+                {
+                    printf("Número já existe");
+                }
+            }
+            else
+            {
                 printf("Já não há espaço\n");
             }
             break;
@@ -53,17 +68,20 @@ int main()
     return 0;
 }
 
+int procura(int numAProcurar, tipoEstudante v[], int quant)
+{
+    
+}
 char menu(int numE)
 {
     char op;
     printf("************************ Menu Principal ************************\n");
-    printf("Estudantes Inseridos: **\n");
-    printf("Estudantes Avaliados: **\n");
+    printf("Estudantes Inseridos: %2d\n", numE);
+    printf("Estudantes Avaliados: **  Notas Positivas (%): ***.**\n");
     printf("A - Acrescenta Estudante\n");
     printf("I - Introdução Notas\n");
     printf("M - Mostrar Dados\n");
     printf("G - Gravar dados em ficheiros L – Ler dados de ficheiro\n");
-    printf("Notas Positivas (%): ***.**\n");
     printf("F - Fim\n");
     printf("Opcao--> ");
 
