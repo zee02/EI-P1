@@ -2,60 +2,112 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <locale.h>
 #define MAX_STRING 50
 #define MAX_ESTUDANTES 100
-typedef struct{
+typedef struct
+{
     int numero;
     char nome[MAX_STRING];
     int nota;
-}tipoEstudante;
+} tipoEstudante;
 int lerQuantidadeEstudantes();
 int lerInteiro(char mensagem[MAX_STRING], int minimo, int maximo);
 void limpaBufferStdin(void);
 tipoEstudante lerDadosEstudante();
 void lerNotas(tipoEstudante v[MAX_ESTUDANTES], int limite);
 void mostrarDados(tipoEstudante v[MAX_ESTUDANTES], int limite);
+char menu(int);
 int main()
 {
-    int i,numEstudantes;
+    int i, numEstudantes = 0;
     tipoEstudante turma[MAX_ESTUDANTES];
-    numEstudantes=lerQuantidadeEstudantes();
-    for(i=0;i<numEstudantes;i++){
-        turma[i]=lerDadosEstudante();
-    }
-    mostrarDados(turma, numEstudantes);
-    lerNotas(turma, numEstudantes);
-    mostrarDados(turma, numEstudantes);
+    char opcao;
+    setlocale(LC_ALL, "");
+    do
+    {
+        opcao = menu(numEstudantes);
+        switch (opcao)
+        {
+        case 'A':
+            if(numEstudantes < MAX_ESTUDANTES){
+                turma[numEstudantes]=lerDadosEstudante();
+            }else{
+                printf("Já não há espaço\n");
+            }
+            break;
+
+        case 'M':
+            mostrarDados(turma, numEstudantes);
+            break;
+        }
+    } while (opcao != 'F');
+
+    // numEstudantes=lerQuantidadeEstudantes();
+    // for(i=0;i<numEstudantes;i++){
+    //     turma[i]=lerDadosEstudante();
+    // }
+    // mostrarDados(turma, numEstudantes);
+    // lerNotas(turma, numEstudantes);
+    // mostrarDados(turma, numEstudantes);
     return 0;
 }
-void lerNotas(tipoEstudante v[MAX_ESTUDANTES], int limite){
+
+char menu(int numE)
+{
+    char op;
+    printf("************************ Menu Principal ************************\n");
+    printf("Estudantes Inseridos: **\n");
+    printf("Estudantes Avaliados: **\n");
+    printf("A - Acrescenta Estudante\n");
+    printf("I - Introdução Notas\n");
+    printf("M - Mostrar Dados\n");
+    printf("G - Gravar dados em ficheiros L – Ler dados de ficheiro\n");
+    printf("Notas Positivas (%): ***.**\n");
+    printf("F - Fim\n");
+    printf("Opcao--> ");
+
+    scanf("%c", &op);
+    limpaBufferStdin();
+    op = toupper(op);
+    return op;
+}
+
+void lerNotas(tipoEstudante v[MAX_ESTUDANTES], int limite)
+{
     int i;
-    for(i=0;i<limite;i++){
+    for (i = 0; i < limite; i++)
+    {
         printf("Estudante: %d  - %s", v[i].numero, v[i].nome);
-        v[i].nota=lerInteiro("Indique nota ", 0,20);
+        v[i].nota = lerInteiro("Indique nota ", 0, 20);
     }
 }
-void mostrarDados(tipoEstudante v[MAX_ESTUDANTES], int limite){
+void mostrarDados(tipoEstudante v[MAX_ESTUDANTES], int limite)
+{
     int i;
-    for(i=0;i<limite;i++){
-        printf("Numero: %d   Nome: %s", v[i].numero, v[i].nome);
-        if(v[i].nota!=-1){
+    for (i = 0; i < limite; i++)
+    {
+        printf("\nNome: %s    Numero: %d \n", v[i].nome, v[i].numero);
+        if (v[i].nota != -1)
+        {
             printf("Nota: %d", v[i].nota);
         }
     }
 }
-tipoEstudante lerDadosEstudante(){
+
+tipoEstudante lerDadosEstudante()
+{
     tipoEstudante e;
     int num;
-    e.numero=lerInteiro("Indique numero ", 1,9999);
-    printf("Indique nome ");
-    fgets(e.nome, MAX_STRING, stdin);
-    e.nota=-1;
+    e.numero = lerInteiro("Indique numero ", 1, 9999);
+    lerString("Indique nome: ", e.nome, MAX_STRING);
+    e.nota = -1;
     return e;
 }
-int lerQuantidadeEstudantes(){
+int lerQuantidadeEstudantes()
+{
     int quant;
-    quant=lerInteiro("Quantidade de estudantes ", 1,MAX_ESTUDANTES);
+    quant = lerInteiro("Quantidade de estudantes ", 1, MAX_ESTUDANTES);
     return quant;
 }
 // Acrescentada variavel controlo para repetir insercao se ao for inserido numero int
@@ -65,21 +117,20 @@ int lerInteiro(char mensagem[MAX_STRING], int minimo, int maximo)
     do
     {
         printf("%s (%d a %d) :", mensagem, minimo, maximo);
-        controlo = scanf ("%d", &numero);  // scanf devolve quantidade de valores vàlidos obtidos
-        limpaBufferStdin();     //limpa todos os caracteres do buffer stdin (nomeadamente o \n)
+        controlo = scanf("%d", &numero); // scanf devolve quantidade de valores vàlidos obtidos
+        limpaBufferStdin();              //limpa todos os caracteres do buffer stdin (nomeadamente o \n)
         if (controlo == 0)
         {
             printf("Devera inserir um numero inteiro \n");
         }
         else
         {
-            if(numero<minimo || numero>maximo)
+            if (numero < minimo || numero > maximo)
             {
                 printf("Numero invalido. Insira novamente:\n");
             }
         }
-    }
-    while(numero<minimo || numero>maximo || controlo ==0);
+    } while (numero < minimo || numero > maximo || controlo == 0);
     return numero;
 }
 float lerFloat(char mensagem[MAX_STRING], float minimo, float maximo)
@@ -89,7 +140,7 @@ float lerFloat(char mensagem[MAX_STRING], float minimo, float maximo)
     do
     {
         printf("%s (%.2f a %.2f) :", mensagem, minimo, maximo);
-        controlo = scanf ("%f", &numero);  // scanf devolve quantidade de valores vàlidos obtidos
+        controlo = scanf("%f", &numero); // scanf devolve quantidade de valores vàlidos obtidos
         limpaBufferStdin();
         if (controlo == 0)
         {
@@ -97,36 +148,34 @@ float lerFloat(char mensagem[MAX_STRING], float minimo, float maximo)
         }
         else
         {
-            if(numero<minimo || numero>maximo)
+            if (numero < minimo || numero > maximo)
             {
                 printf("Numero invalido. Insira novamente:\n");
             }
         }
-    }
-    while(numero<minimo || numero>maximo || controlo ==0);
+    } while (numero < minimo || numero > maximo || controlo == 0);
     return numero;
 }
 void lerString(char mensagem[MAX_STRING], char vetorCaracteres[MAX_STRING], int maximoCaracteres)
 {
     int tamanhoString;
-    do          // Repete leitura caso sejam obtidas strings vazias
+    do // Repete leitura caso sejam obtidas strings vazias
     {
         printf("%s", mensagem);
         fgets(vetorCaracteres, maximoCaracteres, stdin);
         tamanhoString = strlen(vetorCaracteres);
         if (tamanhoString == 1)
         {
-            printf("Nao foram introduzidos caracteres!!! . apenas carregou no ENTER \n\n");  // apenas faz sentido limpar buffer se a ficarem caracteres
+            printf("Nao foram introduzidos caracteres!!! . apenas carregou no ENTER \n\n"); // apenas faz sentido limpar buffer se a ficarem caracteres
         }
-    }
-    while (tamanhoString == 1);
-    if(vetorCaracteres[tamanhoString-1] != '\n')  // ficaram caracteres no buffer....
+    } while (tamanhoString == 1);
+    if (vetorCaracteres[tamanhoString - 1] != '\n') // ficaram caracteres no buffer....
     {
-        limpaBufferStdin();  // apenas faz sentido limpar buffer se a ficarem caracteres
+        limpaBufferStdin(); // apenas faz sentido limpar buffer se a ficarem caracteres
     }
     else
     {
-        vetorCaracteres[tamanhoString-1] = '\0';    //Elimina o \n da string armazenada em vetor
+        vetorCaracteres[tamanhoString - 1] = '\0'; //Elimina o \n da string armazenada em vetor
     }
 }
 void limpaBufferStdin(void)
@@ -135,8 +184,7 @@ void limpaBufferStdin(void)
     do
     {
         chr = getchar();
-    }
-    while (chr != '\n' && chr != EOF);
+    } while (chr != '\n' && chr != EOF);
 }
 /*
 tipoData lerData(void)
