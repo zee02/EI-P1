@@ -70,6 +70,15 @@ int main()
 
 int procura(int numAProcurar, tipoEstudante v[], int quant)
 {
+    int pos;
+    for (int i = 0; i < quant; i++)
+    {
+        if (v[i].numero == numAProcurar)
+        {
+            
+        }
+        
+    }
     
 }
 char menu(int numE)
