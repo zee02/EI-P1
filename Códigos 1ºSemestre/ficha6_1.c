@@ -153,7 +153,7 @@ void contas(tipoEstudante v[MAX_ESTUDANTES], int *quantEstudantes, float *percPo
     *quantEstudantes = numaval;
     if (numaval != 0)
     {
-        *percPosi = (float)positivas / numaval;
+        *percPosi = (float)positivas / numaval * 100;
     }
 }
 
