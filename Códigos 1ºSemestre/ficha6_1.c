@@ -23,7 +23,7 @@ void limpaBufferStdin(void);
 tipoEstudante lerDadosEstudante();
 void lerNotas(tipoEstudante v[MAX_ESTUDANTES], int limite);
 void mostrarDados(tipoEstudante v[MAX_ESTUDANTES], int limite);
-char menu(int numE, int numAvaliados);
+char menu(int numE, int numAvaliados, float);
 int procura(int numAProcurar, tipoEstudante v[], int quant);
 void contas(tipoEstudante v[MAX_ESTUDANTES], int *quantEstudantes, float *percPosi, int numAvaliados);
 
@@ -32,10 +32,12 @@ int main()
     int i, numEstudantes = 0, aux, posicao, num, numAvaliados = 0;
     tipoEstudante turma[MAX_ESTUDANTES];
     char opcao;
+    float percPositivas;
     setlocale(LC_ALL, "");
     do
     {
-        opcao = menu(numEstudantes, numAvaliados);
+        contas(&numAvaliados, &percPositivas, turma, numEstudantes);
+        opcao = menu(numEstudantes, numAvaliados, percPositivas);
         switch (opcao)
         {
         case 'A':
@@ -114,13 +116,13 @@ int procura(int numAProcurar, tipoEstudante v[], int quant)
     }
     return pos;
 }
-char menu(int numE, int numAvaliados)
+char menu(int numE, int numAvaliados, float percPos)
 {
     char op;
     printf("\n\n************************ Menu Principal ************************\n");
     printf("Estudantes Inseridos: %2d\n", numE);
     printf("Estudantes Avaliados: %2d\n", numAvaliados);
-    printf("Notas Positivas (%): ***.**\n");
+    printf("Notas Positivas : %6.3f\n", percPos);
     printf("A - Acrescenta Estudante\n");
     printf("I - Introdução Notas\n");
     printf("M - Mostrar Dados\n");
@@ -142,14 +144,16 @@ void contas(tipoEstudante v[MAX_ESTUDANTES], int *quantEstudantes, float *percPo
         if (v[i].nota == -1)
         {
             numaval++;
-            if(v[i].nota >= 10){
+            if (v[i].nota >= 10)
+            {
                 positivas++;
             }
         }
     }
-    *quantEstudantes=numaval;
-    if(numaval!=0){
-    *percPosi=(float)positivas/numaval;
+    *quantEstudantes = numaval;
+    if (numaval != 0)
+    {
+        *percPosi = (float)positivas / numaval;
     }
 }
 
