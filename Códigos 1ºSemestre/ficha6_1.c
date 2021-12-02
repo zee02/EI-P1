@@ -13,6 +13,7 @@ typedef struct
 } tipoEstudante;
 int lerQuantidadeEstudantes();
 int lerInteiro(char mensagem[MAX_STRING], int minimo, int maximo);
+void lerString(char mensagem[MAX_STRING], char vetorCaracteres[MAX_STRING], int maximoCaracteres);
 void limpaBufferStdin(void);
 tipoEstudante lerDadosEstudante();
 void lerNotas(tipoEstudante v[MAX_ESTUDANTES], int limite);
@@ -35,7 +36,7 @@ int main()
             {
                 aux = lerInteiro("Indique numero ", 1, 9999);
                 posicao = procura(aux, turma, numEstudantes);
-                if (posicao != -1)
+                if (posicao == -1)
                 {
                     turma[numEstudantes].numero = aux;
                     lerString("Indique nome ", turma[numEstudantes].nome, MAX_STRING);
@@ -70,16 +71,17 @@ int main()
 
 int procura(int numAProcurar, tipoEstudante v[], int quant)
 {
-    int pos;
+    int pos=-1;
     for (int i = 0; i < quant; i++)
     {
-        if (v[i].numero == numAProcurar)
+        if (v[i].numero == numAProcurar)    
         {
-            
+            pos=i;
+            i=quant;
         }
         
     }
-    
+    return pos;
 }
 char menu(int numE)
 {
