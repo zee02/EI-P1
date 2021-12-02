@@ -22,7 +22,7 @@ char menu(int);
 int procura(int numAProcurar, tipoEstudante v[], int quant);
 int main()
 {
-    int i, numEstudantes = 0, aux, posicao;
+    int i, numEstudantes = 0, aux, posicao, num;
     tipoEstudante turma[MAX_ESTUDANTES];
     char opcao;
     setlocale(LC_ALL, "");
@@ -53,6 +53,16 @@ int main()
             }
             break;
 
+        case 'I':
+            if(numEstudantes==0){
+                printf("Não há estudantes...\n");
+            }
+            else{
+                num=lerInteiro("Indique número do estudante ", 1, 9999);
+                posicao = procura(num,turma,numEstudantes);
+                turma[posicao].nota = lerInteiro("Indique nota ", 0 ,20);
+            }
+            break;
         case 'M':
             mostrarDados(turma, numEstudantes);
             break;
