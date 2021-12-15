@@ -14,6 +14,16 @@ typedef struct{
     int nota;
     tipoData data;
 }tipoEstudante;
+
+typedef struct
+{
+    int codigoR;
+    int numEstudante;
+    tipoData dataR;
+    int tipoR;
+}tipoReserva;
+
+
 tipoData lerData(void);
 int lerQuantidadeEstudantes();
 int lerInteiro(char mensagem[MAX_STRING], int minimo, int maximo);
@@ -128,6 +138,7 @@ void gravaFicheiroTexto(tipoEstudante v[MAX_ESTUDANTES], int limite)
             }
         }
         printf("\nDados gravados no ficheiro\n");
+        fclose(fich);
     }
     else{
         printf("\n*** ERRO A ABRIR FICHEIRO ***\n");
