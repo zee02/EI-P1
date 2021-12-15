@@ -40,6 +40,7 @@ void contas(int *numA, float *percPos, tipoEstudante v[], int quant);
 void leFicheiroBinario(tipoEstudante v[], int *quant);
 void gravaFicheiroBinario(tipoEstudante v[], int quant);
 void gravaFicheiroTexto(tipoEstudante v[MAX_ESTUDANTES], int limite);
+void eliminaReserva();
 int main()
 {
     int i, numEstudantes = 0, aux, posicao, num, numAvaliados = 0;
@@ -109,6 +110,10 @@ int main()
             break;
         case 'T':
             gravaFicheiroTexto(turma, numEstudantes);
+            break;
+
+        case 'E':
+            eliminaReserva(turma, numEstudantes);
             break;
 
         case 'R':
@@ -250,6 +255,7 @@ char menu(int numE, int numA, float percPos)
     printf("Estudantes Avaliados: %2d Notas Positivas (%%): %6.2f\n", numA, numA == 0 ? 0 : percPos);
     printf("A - Acrescenta Estudante\n");
     printf("R - Adicionar reserva\n");
+    printf("E - Eliminar Reserva\n");
     printf("I - Introdução Notas\n");
     printf("M - Mostrar Dados\n");
     printf("G - Gravar dados em ficheiro\n");
@@ -405,4 +411,8 @@ tipoData lerData(void)
     }
     data.dia = lerInteiro(" dia:", 1, maxDiasMes);
     return data;
+}
+
+void eliminaReserva() {
+
 }
